@@ -1,12 +1,13 @@
-// ==UserScript==
-// @scriptlet redirect-if
-// ==/UserScript==
+redirect-if.js application/javascript
+(function() {
+    'use strict';
 
-redirectIf = function(match, replacement) {
-    return function() {
+    function redirectIf(match, replacement) {
         const url = window.location.href;
         if (url.includes(match)) {
             window.location.replace(replacement);
         }
-    };
-};
+    }
+
+    return redirectIf;
+})();
