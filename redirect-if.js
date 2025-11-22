@@ -1,12 +1,18 @@
-redirect-if.js text/javascript
+redirect-if.js application/javascript
 (function() {
     'use strict';
 
-    function redirectIf(match, replacement) {
+    function redirectIf(pattern, replacementTemplate) {
         const url = window.location.href;
-        if (url.includes(match)) {
-            window.location.replace(replacement);
-        }
+        const regex = new RegExp(pattern);
+
+        const match = url.match(regex);
+        if (!match) return;
+
+        const newUrl = replacementTemplate.replace(/\$([0-9]+)/g, (x, n) => match[n] || '');
+        if (!newUrl || newUrl === url) return;
+
+        window.location.replace(newUrl);
     }
 
     return redirectIf;
