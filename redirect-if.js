@@ -1,4 +1,4 @@
-redirect-if.js application/javascript
+redirect-if.js test/javascript
 (function() {
     'use strict';
 
